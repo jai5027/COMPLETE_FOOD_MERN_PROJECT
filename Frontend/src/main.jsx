@@ -9,6 +9,7 @@ import LoginUser from './pages/LoginUser.jsx'
 import RegisterUser from './pages/RegisterUser.jsx'
 import LoginPartner from './pages/LoginPartner.jsx'
 import RegisterPartner from './pages/RegisterPartner.jsx'
+import Reels from './general/Reels.jsx'
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: 'partner/register',
         element: <RegisterPartner />
+      },
+      {
+        path: '/reels',
+        element: <Reels />
       }
     ]
   }

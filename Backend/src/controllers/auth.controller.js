@@ -92,9 +92,9 @@ async function logoutUser(req, res){
 
 async function registerFoodPartner(req, res){
 
-    const { name, email, password } = req.body
+    const { name, email, password, contactName, contactNumber, address } = req.body
     
-    if(!name || !email || !password){
+    if(!name || !email || !password || !contactName || !contactNumber || !address){
         return res.status(400).json({
             message: "All Fields are required"
         })
@@ -110,7 +110,7 @@ async function registerFoodPartner(req, res){
 
     const hash = await bcrypt.hash(password, 10)
 
-    const foodPartner = await foodPartnerModel.create({ name, email, password: hash })
+    const foodPartner = await foodPartnerModel.create({ name, email, password: hash, contactName, contactNumber, address })
 
     const token = jwt.sign(
         { id: foodPartner._id },
@@ -123,7 +123,10 @@ async function registerFoodPartner(req, res){
         foodPartner: {
             id: foodPartner._id,
             name: foodPartner.name,
-            email: foodPartner.email
+            email: foodPartner.email,
+            contactName: foodPartner.contactName,
+            contactNumber: foodPartner.contactNumber,
+            address: foodPartner.address
         }
     })
 }

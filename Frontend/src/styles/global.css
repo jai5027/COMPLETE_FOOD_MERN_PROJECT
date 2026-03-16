@@ -15,7 +15,7 @@ body {
   font-size: var(--font-size);
   line-height: var(--line-height);
   color: var(--text);
-  background: linear-gradient(135deg, var(--bg), var(--surface));
+  background: var(--bg);
   transition: background 0.25s ease, color 0.25s ease;
 }
 

@@ -7,6 +7,18 @@ const foodPartnerSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 20
     },
+    contactName: {
+        type: String,
+        required: true
+    },
+    contactNumber: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,

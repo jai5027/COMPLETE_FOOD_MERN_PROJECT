@@ -16,7 +16,7 @@ export default function LoginPartner() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await axios.post('http://localhost:3000/api/auth/foodpartner/login', data, { withCredentials: true })
-    navigate('/reels')
+    navigate('/food/create')
   }
 
 

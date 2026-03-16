@@ -11,6 +11,7 @@ import LoginPartner from './pages/LoginPartner.jsx'
 import RegisterPartner from './pages/RegisterPartner.jsx'
 import Reels from './general/Reels.jsx'
 import CreateFood from './food-partner/CreateFood.jsx'
+import Profile from './food-partner/Profile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: '/food/create',
         element: <CreateFood />
+      },
+      {
+        path: '/food-partner/:profile',
+        element: <Profile />
       }
     ]
   }

@@ -39,15 +39,15 @@ const router = createBrowserRouter([
         element: <RegisterPartner />
       },
       {
-        path: '/reels',
+        path: 'reels',
         element: <Reels />
       },
       {
-        path: '/food/create',
+        path: 'food/create',
         element: <CreateFood />
       },
       {
-        path: '/food-partner/:id',
+        path: 'food-partner/:id',
         element: <Profile />
       }
     ]

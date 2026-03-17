@@ -18,6 +18,11 @@ const foodSchema = new mongoose.Schema({
       foodPatner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "foodpartner"
+      },
+
+      likeCount: {
+        type: Number,
+        default: 0
       }
 })
 

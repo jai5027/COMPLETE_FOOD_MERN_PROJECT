@@ -12,4 +12,8 @@ router.post('/', Middelware.authFoodPartnerMiddelware, upload.single('video'), f
 
 router.get('/', Middelware.authUserMiddleware, foodController.getFoodItems)
 
+router.post('/like', Middelware.authUserMiddleware, foodController.likeFood)
+
+router.post('/save', Middelware.authUserMiddleware, foodController.saveFood)
+
 module.exports = router

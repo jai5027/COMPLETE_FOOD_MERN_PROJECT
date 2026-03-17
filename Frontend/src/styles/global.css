@@ -35,3 +35,34 @@ textarea {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
+
+/* Grid container */
+.profile__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0; /* ❌ no gap */
+  border: none;
+}
+
+/* Each tile */
+.profile__tile {
+  width: 100%;
+  aspect-ratio: 3/4; /* 🔥 vertical feel (Instagram jaisa) */
+  overflow: hidden;
+}
+
+/* Video */
+.profile__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 🔥 crop properly */
+  display: block;
+}
+
+.profile__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* circle */
+  object-fit: cover;  /* image crop + fit */
+  display: block;
+}

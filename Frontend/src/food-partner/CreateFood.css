@@ -1,0 +1,119 @@
+.create-food {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  background: var(--bg);
+}
+
+.create-food__card {
+  width: min(480px, 100%);
+  padding: calc(var(--space-lg) + 0.5rem);
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.create-food__header {
+  margin: 0 0 var(--space-lg);
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+}
+
+.create-food__form {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.create-food__field {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.create-food__field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.create-food__field input,
+.create-food__field textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-food__field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.create-food__field input:focus,
+.create-food__field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--focus);
+}
+
+.create-food__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.create-food__button {
+  appearance: none;
+  cursor: pointer;
+  border: 0;
+  border-radius: calc(var(--radius) - 2px);
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: white;
+  box-shadow: var(--shadow-strong);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.create-food__button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.18);
+}
+
+.create-food__secondary {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.create-food__secondary a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.create-food__preview {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border);
+}
+
+.create-food__preview video {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+@media (min-width: 720px) {
+  .create-food {
+    padding: calc(var(--space-xl) + 1rem);
+  }
+
+  .create-food__card {
+    padding: calc(var(--space-xl) + 1rem);
+  }
+}

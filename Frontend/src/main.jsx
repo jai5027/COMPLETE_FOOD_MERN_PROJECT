@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         element: <CreateFood />
       },
       {
-        path: '/food-partner/:profile',
+        path: '/food-partner/:id',
         element: <Profile />
       }
     ]

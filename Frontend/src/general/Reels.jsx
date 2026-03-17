@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import './Reels.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function Reels() {
-   
+  const navigate = useNavigate()
     const [reels, setReels] = useState([])
     
     useEffect(() => {
@@ -34,6 +35,7 @@ function Reels() {
             <button
               className="reelButton"
               type="button"
+              onClick={() => navigate(`/food-partner/${reel.foodPatner}`)}
             >
               Visit Store
             </button>

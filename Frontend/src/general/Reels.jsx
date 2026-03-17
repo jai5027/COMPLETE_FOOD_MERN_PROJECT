@@ -20,8 +20,6 @@ function Reels() {
     { withCredentials: true }
   )
 
-  console.log(res.data) // 🔥 check
-
   setReels((prev) =>
     prev.map((v) =>
       v._id === item._id
@@ -29,6 +27,26 @@ function Reels() {
             ...v,
             isLiked: res.data.like,
             likeCount: res.data.likeCount
+          }
+        : v
+    )
+  )
+}
+
+async function saveVideo(item){
+  const res = await axios.post(
+    'http://localhost:3000/api/food/save',
+    { foodId: item._id },
+    { withCredentials: true }
+  )
+
+  setReels((prev) =>
+    prev.map((v) =>
+      v._id === item._id
+        ? {
+            ...v,
+            isSaved: res.data.save,
+            saveCount: res.data.saveCount
           }
         : v
     )
@@ -70,11 +88,11 @@ function Reels() {
                 <span className="reelActionText">{reel.likeCount ?? 0}</span>
               </button>
 
-              <button className="reelAction" type="button">
+              <button className="reelAction" type="button" onClick={() => saveVideo(reel)}>
                 <span className="reelActionIcon" aria-hidden="true">
                   🔖
                 </span>
-                <span className="reelActionText">{reel.saveCount}</span>
+                <span className="reelActionText">{reel.saveCount ?? 0}</span>
               </button>
 
               <button className="reelAction" type="button">
@@ -103,7 +121,8 @@ function Reels() {
         <button
           type="button"
           className="navItem"
->
+          onClick={() => navigate('/saved')}
+        >
           <span className="navIcon" aria-hidden="true">
             🔖
           </span>

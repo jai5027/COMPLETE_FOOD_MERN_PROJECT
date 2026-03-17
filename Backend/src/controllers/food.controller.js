@@ -81,34 +81,71 @@ async function likeFood(req, res){
 }
 
 async function saveFood(req, res){
-      const { foodId } = req.body
-      const user = req.body
+      try {
+    const { foodId } = req.body
+    const userId = req.user._id   
 
-      const isAlreadySaved = await saveModel.findOne({
-            user: user._id,
-            food: foodId
-      })
-      
-      if(isAlreadySaved){
+    const isAlreadySaved = await saveModel.findOne({
+      user: userId,
+      food: foodId
+    })
+
+    // ❌ UNSAVE
+    if(isAlreadySaved){
       await saveModel.deleteOne({
-            user: user._id,
-            food: foodId
-      })
-      }
-
-      res.status(200).json({
-            message: "Food unsaved successfully"
+        user: userId,
+        food: foodId
       })
 
-      const save = await saveModel.findOne({
-            user: user._id,
-            food: foodId
-      })
+      const updatedFood = await foodModel.findByIdAndUpdate(
+        foodId,
+        { $inc: { saveCount: -1 } },
+        { new: true }
+      )
 
-      res.status(200).json({
-            message: "Food saved successfully",
-            save
+      return res.json({
+        save: false,
+        saveCount: updatedFood.saveCount
       })
+    }
+
+    // ✅ SAVE
+    await saveModel.create({
+      user: userId,
+      food: foodId
+    })
+
+    const updatedFood = await foodModel.findByIdAndUpdate(
+      foodId,
+      { $inc: { saveCount: 1 } },
+      { new: true }
+    )
+
+    return res.json({
+      save: true,
+      saveCount: updatedFood.saveCount
+    })
+
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ message: "Server error" })
+  }
 }
 
-module.exports = { createFood, getFoodItems, likeFood, saveFood }
+async function getSavedFoodItems(req, res){
+  try {
+    const userId = req.user._id
+
+    const savedFoods = await saveModel.find({ user: userId }).populate('food')
+
+    res.json({
+      message: "Saved food items fetched successfully",
+      savedFoods
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ message: "Server error" })
+  }
+}
+
+module.exports = { createFood, getFoodItems, likeFood, saveFood, getSavedFoodItems }

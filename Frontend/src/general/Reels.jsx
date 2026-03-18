@@ -63,7 +63,7 @@ async function saveVideo(item){
             loop
             autoPlay
             playsInline
-            controls={false}
+            controls
             preload="none"
           />
 

@@ -10,59 +10,21 @@ export default function Saved() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3000/api/food/saved', { withCredentials: true })
-      .then((res) => {
-        setSavedVideos(res.data.savedFoods || [])
-      })
-      .catch(() => {
-        setError('Unable to load saved videos. Please try again.')
-      })
-      .finally(() => setLoading(false))
-  }, [])
+        axios.get("http://localhost:3000/api/food/save", { withCredentials: true })
+            .then(response => {
+                const savedFoods = response.data.savedFoods.map((item) => ({
+                    _id: item.food._id,
+                    video: item.food.video,
+                    description: item.food.description,
+                    likeCount: item.food.likeCount,
+                    savesCount: item.food.savesCount,
+                    commentsCount: item.food.commentsCount,
+                    foodPartner: item.food.foodPartner,
+                }))
+                setSavedVideos(savedFoods)
+            })
+    }, [])
 
-  async function toggleLike(item) {
-    try {
-      const res = await axios.post(
-        'http://localhost:3000/api/food/like',
-        { foodId: item._id },
-        { withCredentials: true }
-      )
-
-      setSavedVideos((prev) =>
-        prev.map((v) =>
-          v._id === item._id
-            ? { ...v, isLiked: res.data.like, likeCount: res.data.likeCount }
-            : v
-        )
-      )
-    } catch {
-      // ignore for now
-    }
-  }
-
-  async function toggleSave(item) {
-    try {
-      const res = await axios.post(
-        'http://localhost:3000/api/food/save',
-        { foodId: item._id },
-        { withCredentials: true }
-      )
-
-      if (!res.data.save) {
-        setSavedVideos((prev) => prev.filter((v) => v._id !== item._id))
-        return
-      }
-
-      setSavedVideos((prev) =>
-        prev.map((v) =>
-          v._id === item._id ? { ...v, saveCount: res.data.saveCount } : v
-        )
-      )
-    } catch {
-      // ignore for now
-    }
-  }
 
   return (
     <main className="savedPage">
